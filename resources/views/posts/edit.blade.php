@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container lg:w-1/2 md:w-4/5 w-11/12 mx-auto mt-8 px-8 bg-white shadow-md">
-        <h2 class="text-center text-lg font-bold pt-6 tracking-widest">食事編集</h2>
+        <h2 class="text-center text-lg font-bold pt-6 tracking-widest">食事記事編集</h2>
 
         <x-validation-errors :errors="$errors" />
 
@@ -10,12 +10,24 @@
             @method('PUT')
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="title">
-                    メニュー
+                    タイトル
                 </label>
                 <input type="text" name="title"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
                     required placeholder="タイトル" value="{{ old('title', $post->title) }}">
             </div>
+            <!-- カテゴリーのラジオボタンを追加 -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm mb-2">カテゴリー</label>
+                @foreach ($categories as $category)
+                <label class="block">
+                    <input type="radio" name="category_id" value="{{ $category->id }}"
+                        {{ old('category_id') == $category->id ? 'checked' : '' }}>
+                    {{ $category->name }}
+                </label>
+                @endforeach
+            </div>
+
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="body">
                     詳細
@@ -26,7 +38,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="image">
-                    メニュー画像
+                    食事の画像
                 </label>
                 <img src="{{ $post->image_url }}" alt="" class="mb-4 md:w-2/5 sm:auto">
                 <input type="file" name="image" class="border-gray-300">
