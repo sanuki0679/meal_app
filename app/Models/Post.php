@@ -29,5 +29,10 @@ class Post extends Model
     {
         return 'images/posts/' . $this->image;
     }
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
 

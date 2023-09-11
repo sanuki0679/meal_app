@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create', ['categories' => $categories]);
     }
 
     /**
@@ -190,4 +193,5 @@ class PostController extends Controller
     {
         return date('YmdHis') . '_' . $file->getClientOriginalName();
     }
+    
 }
