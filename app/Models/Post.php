@@ -30,7 +30,7 @@ class Post extends Model
         return 'images/posts/' . $this->image;
     }
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

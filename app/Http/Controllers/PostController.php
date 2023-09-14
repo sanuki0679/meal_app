@@ -44,7 +44,7 @@ class PostController extends Controller
     {
         $post = new Post($request->all());
         $post->user_id = $request->user()->id;
-
+        $post->category_id = $request->category()->id;
         $file = $request->file('image');
         $post->image = self::createFileName($file);
 

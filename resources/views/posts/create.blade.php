@@ -18,10 +18,10 @@
             <!-- カテゴリーのラジオボタンを追加 -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2">カテゴリー</label>
-                @foreach ($categories ?? '' as $category)
+                @foreach ($categories as $category)
                 <label class="block">
                     <input type="radio" name="category_id" value="{{ $category->id }}"
-                        {{ old('category_id') == $category->id ? 'checked' : '' }}>
+                    {{ old('category_id') == $category->id ? 'checked' : '' }}>
                     {{ $category->name }}
                 </label>
                 @endforeach
