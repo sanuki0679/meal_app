@@ -22,7 +22,7 @@
                 @foreach ($categories as $category)
                 <label class="block">
                     <input type="radio" name="category_id" value="{{ $category->id }}"
-                        {{ old('category_id') == $category->id ? 'checked' : '' }}>
+                        {{ old('category_id', $post->category_id) == $category->id ? 'checked' : '' }}>
                     {{ $category->name }}
                 </label>
                 @endforeach
