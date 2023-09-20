@@ -28,6 +28,7 @@ class PostRequest extends FormRequest
         $rule = [
             'title' => 'required|string|max:50',
             'body' => 'required|string|max:2000',
+            'category_id' => 'required|in:1,2,3',
         ];
 
         if ($route === 'posts.store' ||

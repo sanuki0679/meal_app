@@ -110,7 +110,7 @@ class PostController extends Controller
     public function update(PostRequest $request, $id)
     {
         $post = Post::find($id);
-
+        $post->category_id = $request->category_id;
         if ($request->user()->cannot('update', $post)) {
             return redirect()->route('posts.show', $post)
                 ->withErrors('自分の記事以外は更新できません');
