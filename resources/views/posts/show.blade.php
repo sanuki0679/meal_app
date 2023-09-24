@@ -18,8 +18,8 @@
         </article>
         
         @auth
-            @if (auth()->user()->hasLiked($post))
-                <form action="{{ route('posts.likes.destroy', [$post, $post->likes->first()]) }}" method="post">
+            @if ($like)
+                <form action="{{ route('posts.likes.destroy', [$post, $like]) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit"

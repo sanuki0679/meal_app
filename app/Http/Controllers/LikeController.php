@@ -12,26 +12,26 @@ use Auth;
 class LikeController extends Controller
 {
     public function store(Post $post)
-{
-    $user = auth()->user();
-    
-    if (!$user->hasLiked($post)) {
+    {
+        $user = auth()->user();
+
+
         $like = new Like();
         $like->user_id = $user->id;
-        $post->likes()->save($like);
+        $like->post_id = $post->id;
+        $like->save();
+
+        return back();
     }
 
-    return back();
-}
+    public function destroy(Post $post, Like $like)
+    {
+        $user = auth()->user();
 
-public function destroy(Post $post, Like $like)
-{
-    $user = auth()->user();
-
-    if ($user->hasLiked($post) && $user->id === $like->user_id) {
+        $like = Like::find($like->id);
         $like->delete();
-    }
 
-    return back();
-}
+
+        return back();
+    }
 }

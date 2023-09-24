@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function hasLiked(Post $post)
 {
-    return $post->likes->where('user_id', $this->id)->count() > 0;
+    return $this->hasMany(Like::class)->count() > 0;
 }
 
 
