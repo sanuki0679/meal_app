@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Like;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -83,7 +85,13 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        return view('posts.show', compact('post'));
+        if(Auth::user()) {
+            $like = Like::where('post_id', $post->id)
+                ->where('user_id', auth()->user()->id)->first();
+            return view('posts.show', compact('post', 'like'));
+        } else {
+            return view('posts.show', compact('post'));
+        }
     }
 
     /**
